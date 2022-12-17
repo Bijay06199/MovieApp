@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Movie Lover</string>
+    <string name="validation">Validation</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="email_address">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="start">Start</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="overview_desc">Audio description (AD) provides linguistic descriptions of movies and allows visually impaired people to follow a movie along with their peers.</string>
+</resources>
