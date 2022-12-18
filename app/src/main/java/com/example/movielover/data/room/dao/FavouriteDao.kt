@@ -17,4 +17,7 @@ interface FavouriteDao:BaseDao<FavouriteModel> {
     @Query("SELECT * FROM favourite")
     suspend fun getFavouriteFromId(): List<FavouriteModel>
 
+    @Query("delete from favourite where movieId=:id")
+    suspend fun deleteFavourite(id:Int)
+
 }

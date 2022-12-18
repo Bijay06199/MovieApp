@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.movielover.BR
 import com.example.movielover.R
@@ -16,6 +17,7 @@ import com.example.movielover.data.room.model.FavouriteModel
 import com.example.movielover.databinding.FragmentDetailMovieBinding
 import com.example.movielover.ui.dashboard.home.detailMovie.adapter.BillCastAdapter
 import com.example.movielover.ui.dashboard.home.detailMovie.model.ProfileModel
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -45,8 +47,26 @@ class DetailMovieFragment : BaseFragment<FragmentDetailMovieBinding,DetailMovieV
         image = DetailMovieFragmentArgs.fromBundle(requireArguments()).imageString
         overviewString = DetailMovieFragmentArgs.fromBundle(requireArguments()).overview
         movieId = DetailMovieFragmentArgs.fromBundle(requireArguments()).id
+        getFavouriteMovies()
         initViews()
         initRecyclerView()
+    }
+
+    private fun getFavouriteMovies() {
+        with(viewDataBinding){
+            with(mViewModel!!){
+                getFavouriteMovies()
+                favouriteMovieList.observe(viewLifecycleOwner, Observer {
+                    it.forEach {
+                        if (it.movieId==movieId){
+                            favouriteIcon.setImageDrawable(resources.getDrawable(R.drawable.favourite_selected))
+                            favouriteIcon.isEnabled=false
+                        }
+
+                    }
+                })
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -79,7 +99,9 @@ class DetailMovieFragment : BaseFragment<FragmentDetailMovieBinding,DetailMovieV
 
 
             with(mViewModel!!){
+
                 favouriteIcon.setOnClickListener {
+
                     favouriteIcon.setImageDrawable(resources.getDrawable(R.drawable.favourite_selected))
                     Toast.makeText(requireContext(),"Movie added to favourite",Toast.LENGTH_SHORT).show()
                     saveFavourite(FavouriteModel(movieImage = image, movieName = title,movieId))

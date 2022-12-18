@@ -13,7 +13,7 @@ import com.example.movielover.data.room.model.FavouriteModel
 import com.example.movielover.ui.dashboard.home.adapter.TrendingViewHolder
 import com.example.movielover.ui.dashboard.home.model.ResultX
 
-class FavouriteAdapter(val items: List<FavouriteModel>, val context: Context, val itemClickListener: OnItemClicklistener) : RecyclerView.Adapter<TrendingViewHolder>() {
+class FavouriteAdapter(val items: List<FavouriteModel>, val context: Context, val itemClickListener: OnItemClicklistener) : RecyclerView.Adapter<FavouriteViewHolder>() {
 
 
     override fun getItemCount(): Int {
@@ -21,11 +21,12 @@ class FavouriteAdapter(val items: List<FavouriteModel>, val context: Context, va
     }
 
 
-    override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
 
         holder.movieName.setText(items[position].movieName)
 
-        holder.movieImage.setOnClickListener {
+        holder.deleteFavourite.setOnClickListener {
+            itemClickListener.onDeleteFavourite(items[position].movieId)
         }
 
         Glide.with(context)
@@ -38,12 +39,13 @@ class FavouriteAdapter(val items: List<FavouriteModel>, val context: Context, va
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
-        return TrendingViewHolder(LayoutInflater.from(context).inflate(R.layout.popular_single_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
+        return FavouriteViewHolder(LayoutInflater.from(context).inflate(R.layout.single_favourite_item, parent, false))
 
     }
 
     interface OnItemClicklistener {
+        fun onDeleteFavourite(id:Int)
     }
 
 
@@ -53,6 +55,7 @@ class FavouriteViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     val movieName= view.findViewById<TextView>(R.id.movie_name)
     val movieImage = view.findViewById<ImageView>(R.id.movie_image)
+    val deleteFavourite=view.findViewById<ImageView>(R.id.iv_cross)
 
 
 }

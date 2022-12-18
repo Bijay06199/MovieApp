@@ -41,4 +41,19 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding, FavouriteViewMo
         }
     }
 
+    override fun onDeleteFavourite(id: Int) {
+        with(mViewModel!!){
+            deleteFavourite(id)
+            deleteFavouriteMovie.observe(viewLifecycleOwner, Observer {
+                getFavouriteMovies()
+
+                favouriteMovieList.observe(viewLifecycleOwner, Observer {
+                    favouriteAdapter = FavouriteAdapter(it,requireContext(),this@FavouriteFragment)
+                    viewDataBinding.favouriteRv.adapter = favouriteAdapter
+                })
+            })
+        }
+
+    }
+
 }

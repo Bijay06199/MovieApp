@@ -74,25 +74,10 @@ class DashBoardActivity :AppCompatActivity(){
             }
         }
 
-//        binding.bottomNav.setOnNavigationItemReselectedListener {
-//            when (it.itemId) {
-//                R.id.homeFragment -> {
-//                   loadFragment(HomeFragment())
-//                    return@setOnNavigationItemReselectedListener
-//                }
-//                R.id.favouriteFragment -> {
-//                   loadFragment(FavouriteFragment())
-//                    return@setOnNavigationItemReselectedListener
-//                }
-//
-//            }
-//        }
     }
 
     private fun setUpBottomNavView() {
-        // Finding the Navigation Controller
         navController = findNavController(R.id.navHostFragment)
-        // Setting Navigation Controller with the BottomNavigationView
         binding.bottomNav.setupWithNavController(navController)
     }
 
@@ -105,12 +90,6 @@ class DashBoardActivity :AppCompatActivity(){
     @SuppressLint("RestrictedApi")
     private fun changeNavigation(position: Int) {
 
-//        if (navController.backStack.count() > 1) {
-//            val count = navController.backStack.count()
-//            for (i in 0 until count)
-//                navController.navigateUp()
-//        }
-        //   navController.popBackStack(R.id.navigation_home, false)
 
         navController.navigate(
             when (position) {

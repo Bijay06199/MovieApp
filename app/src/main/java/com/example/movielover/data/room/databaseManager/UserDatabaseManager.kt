@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 interface UserDatabaseManager {
     suspend fun saveFavourite(favouriteModel: FavouriteModel)
     suspend fun getFavourite(): List<FavouriteModel>
+    suspend fun deleteFavourite(id:Int)
 
 
 }
@@ -29,6 +30,12 @@ class UserDatabaseManagerImpl(
             favouriteDao.getFavouriteFromId()
         }
 
+    }
+
+    override suspend fun deleteFavourite(id: Int) {
+        withContext(Dispatchers.IO){
+            favouriteDao.deleteFavourite(id)
+        }
     }
 
 }

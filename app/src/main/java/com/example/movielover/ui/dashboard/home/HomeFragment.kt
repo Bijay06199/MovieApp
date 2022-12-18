@@ -35,7 +35,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),PopularA
     lateinit var popularAdapter: PopularAdapter
     lateinit var trendingAdapter: TrendingAdapter
     lateinit var nowPlayingAdapter: NowPlayingAdapter
-    var popularArrayList = ArrayList<Result>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,20 +60,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),PopularA
 
                     popularAdapter = PopularAdapter(it.results,requireContext(),this@HomeFragment)
                     popularRv.adapter = popularAdapter
-                    popularAdapter.notifyDataSetChanged()
 
                 })
 
                 trendingResponse.observe(viewLifecycleOwner, Observer {
                     trendingAdapter = TrendingAdapter(it.results,requireContext(),this@HomeFragment)
                     trendingRv.adapter = trendingAdapter
-                    trendingAdapter.notifyDataSetChanged()
                 })
 
                 nowPlayingResponse.observe(viewLifecycleOwner, Observer {
                     nowPlayingAdapter = NowPlayingAdapter(it.results,requireContext(),this@HomeFragment)
                     nowPlayingRv.adapter = nowPlayingAdapter
-                    nowPlayingAdapter.notifyDataSetChanged()
                 })
             }
         }
